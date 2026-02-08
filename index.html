@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bloom Nest</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<script>
+function openZoom(){
+  let img = document.getElementById("flowerImg");
+
+  let zoom = document.createElement("div");
+  zoom.style.position="fixed";
+  zoom.style.top="0";
+  zoom.style.left="0";
+  zoom.style.width="100%";
+  zoom.style.height="100%";
+  zoom.style.background="rgba(0,0,0,.8)";
+  zoom.style.display="flex";
+  zoom.style.alignItems="center";
+  zoom.style.justifyContent="center";
+  zoom.style.zIndex="9999";
+
+  zoom.innerHTML = `<img src="${img.src}" style="max-width:90%;max-height:90%;border-radius:20px;">`;
+
+  document.body.appendChild(zoom);
+
+  zoom.onclick = ()=> zoom.remove();
+}
+</script>
+<body>
+
+<div class="topbar">
+    <div class="hero">
+  <div class="brand">Bloom Nest</div>
+  <div class="tagline">Luxury flowers for every emotion</div>
+</div>
+
+  <div class="cart">
+    <a href="cart.html">
+      🛒 Cart: <span id="cartCount">0</span> | Total: $<span id="total">0</span>
+    </a>
+  </div>
+</div>
+
+<div id="toast">Added to cart!</div>
+
+<div class="menu">
+  <button onclick="loadFlowers('baby',this)">Baby</button>
+  <button onclick="loadFlowers('anniversary',this)">Anniversary</button>
+  <button onclick="loadFlowers('birthday',this)">Birthday</button>
+  <button onclick="loadFlowers('roses',this)">Roses</button>
+  <button onclick="loadFlowers('wedding',this)">Wedding</button>
+</div>
+
+<div class="display">
+
+  <div class="card">
+
+    <div class="image-box">
+      <img id="flowerImg" onclick="openZoom()">
+    </div>
+
+    <div class="info">
+      <button onclick="addToCart()" class="cart-btn">Add to Cart</button>
+
+      <h1 id="name"></h1>
+      <p id="benefits"></p>
+      <p>Color: <span id="color"></span></p>
+      <p>Size: <span id="size"></span></p>
+      <p>Qty: <span id="qty"></span></p>
+      <p class="price" id="price"></p>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="controls">
+  <button onclick="prev()">Prev</button>
+  <button onclick="next()">Next</button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
