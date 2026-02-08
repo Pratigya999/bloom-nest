@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Bloom Nest</title>
+
 <style>
 body{
 margin:0;
@@ -10,42 +11,72 @@ display:flex;
 justify-content:center;
 align-items:center;
 font-family:Poppins,sans-serif;
-background:linear-gradient(#fff,#ffecec);
+background:linear-gradient(135deg,#fff0f3,#ffe4ec);
 }
 
-.box{
+.cover{
 background:white;
-padding:60px;
-border-radius:20px;
+padding:50px;
+border-radius:25px;
 text-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,.1);
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+animation:fade 1s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:scale(.9)}
+to{opacity:1;transform:scale(1)}
 }
 
 h1{
-color:#e25c5c;
+color:#e46a7c;
+font-size:48px;
 margin-bottom:10px;
 }
 
+p{
+color:#666;
+margin-bottom:30px;
+}
+
 button{
-padding:12px 30px;
-border:none;
-border-radius:30px;
-background:#e25c5c;
+background:#0b1c2d;
 color:white;
-font-size:16px;
+border:none;
+padding:15px 40px;
+border-radius:30px;
+font-size:18px;
 cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#e46a7c;
+transform:scale(1.05);
+}
+
+.flower{
+font-size:40px;
+margin-bottom:20px;
 }
 </style>
 </head>
 
 <body>
-<div class="box">
+
+<div class="cover">
+
+<div class="flower">🌸🌷🌹</div>
+
 <h1>Bloom Nest</h1>
+
 <p>Luxury flowers for every emotion</p>
 
 <button onclick="location.href='index.html'">
-Enter Store 🌸
+Enter Store
 </button>
+
 </div>
+
 </body>
 </html>
