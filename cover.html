@@ -3,6 +3,8 @@
 <head>
 <title>Bloom Nest</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
 <style>
 body{
 margin:0;
@@ -11,60 +13,66 @@ display:flex;
 justify-content:center;
 align-items:center;
 font-family:Poppins,sans-serif;
-background:radial-gradient(circle,#fff0f3,#ffdbe4);
+background:
+linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),
+url("https://images.unsplash.com/photo-1526045478516-99145907023c");
+background-size:cover;
+background-position:center;
 }
 
 .card{
-background:rgba(255,255,255,.9);
-padding:60px 50px;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(12px);
+padding:70px 60px;
 border-radius:30px;
 text-align:center;
-box-shadow:0 25px 60px rgba(0,0,0,.15);
-animation:pop 1s ease;
+box-shadow:0 30px 80px rgba(0,0,0,.2);
+animation:fade 1s ease;
 }
 
-@keyframes pop{
-0%{opacity:0;transform:scale(.8)}
-100%{opacity:1;transform:scale(1)}
-}
-
-.logo{
-font-size:60px;
-margin-bottom:10px;
+@keyframes fade{
+0%{opacity:0;transform:translateY(40px)}
+100%{opacity:1;}
 }
 
 h1{
-color:#e46a7c;
-font-size:46px;
-margin:10px 0;
+font-family:"Playfair Display";
+color:#e56b7c;
+font-size:48px;
+margin-bottom:10px;
 }
 
 .tag{
 color:#555;
-margin-bottom:30px;
-letter-spacing:1px;
+margin-bottom:35px;
 }
 
 button{
-background:linear-gradient(135deg,#ff7a8a,#e46a7c);
+background:linear-gradient(135deg,#ff9aa9,#e56b7c);
 border:none;
 color:white;
-padding:16px 45px;
+padding:16px 50px;
 font-size:18px;
 border-radius:40px;
 cursor:pointer;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
 transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 button:hover{
 transform:scale(1.08);
 }
 
+.petals{
+font-size:26px;
+margin-bottom:15px;
+letter-spacing:8px;
+}
+
 small{
 display:block;
 margin-top:25px;
-color:#aaa;
+color:#999;
 }
 </style>
 </head>
@@ -73,7 +81,7 @@ color:#aaa;
 
 <div class="card">
 
-<div class="logo">🌸🌷🌹</div>
+<div class="petals">🌸 🌷 🌹</div>
 
 <h1>Bloom Nest</h1>
 
