@@ -9,7 +9,7 @@ const flowers = {
       size: "Small",
       qty: "6 stems",
       price: "$15",
-      img: "images/baby.webp"
+      img: "baby.webp"
     }
   ],
 
@@ -21,7 +21,7 @@ const flowers = {
       size: "Medium",
       qty: "12 stems",
       price: "$30",
-      img: "images/anniversary.webp"
+      img: "anniversary.webp"
     }
   ],
 
@@ -33,7 +33,7 @@ const flowers = {
       size: "Large",
       qty: "18 stems",
       price: "$40",
-      img: "images/birthday.webp"
+      img: "birthday.webp"
     }
   ],
 
@@ -45,7 +45,7 @@ const flowers = {
       size: "Large",
       qty: "24 stems",
       price: "$50",
-      img: "images/roses.webp"
+      img: "roses.webp"
     }
   ],
 
@@ -57,7 +57,7 @@ const flowers = {
       size: "Extra Large",
       qty: "30 stems",
       price: "$70",
-      img: "images/wedding.webp"
+      img: "wedding.webp"
     }
   ]
 };
@@ -205,4 +205,5 @@ function openZoom(){
   div.onclick = function(){
     div.remove();
   }
+
 }
