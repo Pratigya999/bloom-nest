@@ -127,6 +127,33 @@ window.location.href="thankyou.html";
 showCart();
 
 </script>
+  <script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = Number(localStorage.getItem("total")) || 0;
+
+const cartBox = document.getElementById("cart-items");
+const totalBox = document.getElementById("cart-total");
+const emptyText = document.getElementById("empty-text");
+
+if(cart.length === 0){
+  emptyText.style.display = "block";
+}else{
+  emptyText.style.display = "none";
+
+  cart.forEach(item=>{
+    let div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `
+      <h3>${item.name}</h3>
+      <p>$${item.price}</p>
+    `;
+    cartBox.appendChild(div);
+  });
+
+  totalBox.innerText = "$" + total;
+}
+</script>
 
 </body>
+
 </html>
