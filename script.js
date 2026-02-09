@@ -42,6 +42,11 @@ btn.classList.add("active");
 
 function show(){
 let f=flowers[currentCategory][index];
+
+document.querySelector(".card").classList.remove("fade");
+void document.querySelector(".card").offsetWidth;
+document.querySelector(".card").classList.add("fade");
+
 flowerImg.src=f.img;
 name.innerText=f.name;
 benefits.innerText=f.benefits;
@@ -74,13 +79,13 @@ localStorage.setItem("cart", JSON.stringify(cart));
 localStorage.setItem("total", total);
 
 document.getElementById("cartCount").innerText = cart.length;
-document.getElementById("total").innerText = total;
 
-alert("Added to cart!");
+document.getElementById("toast").classList.add("show");
+setTimeout(()=>document.getElementById("toast").classList.remove("show"),2000);
 }
 
+/* Auto highlight Baby on load */
+window.onload = ()=>{
+document.querySelector(".menu button").classList.add("active");
 show();
-
-
-
-
+}
