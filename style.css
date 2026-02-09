@@ -10,6 +10,32 @@ body {
   display:flex;
   flex-direction:column;
 }
+.category{
+  margin:25px auto;
+  width:90%;
+  max-width:500px;
+}
+
+.category h2{
+  cursor:pointer;
+  color:#e56b7c;
+  font-size:22px;
+}
+
+.sub-options{
+  display:none;
+  margin-top:10px;
+  padding-left:15px;
+}
+
+.sub-options p{
+  margin:8px 0;
+  color:#555;
+  background:#fff;
+  padding:10px;
+  border-radius:10px;
+  box-shadow:0 5px 10px rgba(0,0,0,.08);
+}
 
 .menu{
   display:flex;
@@ -439,4 +465,5 @@ body {
   max-width:90%;
   max-height:90%;
   border-radius:20px;
+
 }
