@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Bloom Nest | Online Flower Shop | Luxury Flowers Delivery</title>
+
 <meta name="description" content="Bloom Nest is an online flower shop offering luxury flowers for every emotion. Order flowers online for birthday, anniversary, wedding and special occasions.">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@ justify-content:center;
 align-items:center;
 
 background:
-linear-gradient(rgba(255,255,255,.45),rgba(255,255,255,.75),rgba(255,255,255,45)),
+linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.75)),
 url("flowers.webp");
 
 background-size:cover;
@@ -83,16 +84,6 @@ color:#999;
 <body>
 
 <div class="card">
-<div class="category">
-  <h2 onclick="toggleAnniversary()">🎉 Anniversary</h2>
-
-  <div id="anniversary-options" class="sub-options">
-    <p>🌹 Red Rose Bouquet</p>
-    <p>🌸 Pink Roses Box</p>
-    <p>🌼 Mixed Flower Basket</p>
-    <p>💐 Premium Anniversary Combo</p>
-  </div>
-</div>
 
 <div class="petals">🌸 🌷 🌹</div>
 
@@ -107,12 +98,6 @@ Enter Store ✨
 <small>Fresh • Elegant • Handcrafted</small>
 
 </div>
-  <script>
-function toggleAnniversary(){
-  const box = document.getElementById("anniversary-options");
-  box.style.display = box.style.display === "block" ? "none" : "block";
-}
-</script>
 
 </body>
 </html>
