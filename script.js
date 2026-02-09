@@ -1,6 +1,3 @@
-let cart = [];
-let total = 0;
-
 const flowers = {
 
 baby:[
@@ -65,14 +62,25 @@ show();
 }
 
 function addToCart(){
-let f=flowers[currentCategory][index];
+let f = flowers[currentCategory][index];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = Number(localStorage.getItem("total")) || 0;
+
 cart.push(f);
-total+=f.price;
-cartCount.innerText=cart.length;
-document.getElementById("total").innerText=total;
+total += f.price;
+
+localStorage.setItem("cart", JSON.stringify(cart));
+localStorage.setItem("total", total);
+
+document.getElementById("cartCount").innerText = cart.length;
+document.getElementById("total").innerText = total;
+
+alert("Added to cart!");
 }
 
 show();
+
 
 
 
