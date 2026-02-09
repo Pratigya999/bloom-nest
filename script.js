@@ -1,8 +1,23 @@
 const flowers = {
-
-baby:[
-{name:"Baby Pink Roses",img:"images/baby.webp",price:25,color:"Pink",size:"Small",qty:"12",benefits:"Perfect newborn gift"},
-{name:"Soft Tulips",img:"images/baby.webp",price:30,color:"White",size:"Medium",qty:"10",benefits:"Gentle baby blooms"}
+baby: [
+  {
+    name: "Baby Bloom",
+    benefits: "Gentle and fresh, perfect for new beginnings.",
+    color: "Pink",
+    size: "Small",
+    qty: "6 stems",
+    price: 15,
+    img: "images/baby.webp"
+  },
+  {
+    name: "Soft Baby Roses",
+    benefits: "Soft pastel roses for newborns.",
+    color: "Peach",
+    size: "Small",
+    qty: "8 stems",
+    price: 18,
+    img: "images/baby.webp"
+  }
 ],
 
 anniversary:[
@@ -57,12 +72,14 @@ price.innerText="$"+f.price;
 }
 
 function next(){
-index=(index+1)%flowers[currentCategory].length;
+if(!flowers[currentCategory]) return;
+index = (index + 1) % flowers[currentCategory].length;
 show();
 }
 
 function prev(){
-index=(index-1+flowers[currentCategory].length)%flowers[currentCategory].length;
+if(!flowers[currentCategory]) return;
+index = (index - 1 + flowers[currentCategory].length) % flowers[currentCategory].length;
 show();
 }
 
@@ -73,7 +90,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let total = Number(localStorage.getItem("total")) || 0;
 
 cart.push(f);
-total += f.price;
+total += Number(f.price);
 
 localStorage.setItem("cart", JSON.stringify(cart));
 localStorage.setItem("total", total);
@@ -89,3 +106,4 @@ window.onload = ()=>{
 document.querySelector(".menu button").classList.add("active");
 show();
 }
+
