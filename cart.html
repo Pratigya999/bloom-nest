@@ -5,53 +5,55 @@
 
 <style>
 body{
-font-family:Poppins,sans-serif;
-background:#fff0f3;
-padding:30px;
+  font-family:Poppins,sans-serif;
+  background:#fff0f3;
+  padding:30px;
 }
 
 h1{
-text-align:center;
+  text-align:center;
 }
 
 .item{
-background:white;
-padding:15px;
-margin:15px auto;
-max-width:500px;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-display:flex;
-gap:15px;
-align-items:center;
+  background:white;
+  padding:15px;
+  margin:15px auto;
+  max-width:500px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+  display:flex;
+  gap:15px;
+  align-items:center;
 }
 
 .item img{
-width:80px;
-border-radius:10px;
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  border-radius:10px;
 }
 
 .total{
-text-align:center;
-font-size:22px;
-font-weight:bold;
-margin-top:30px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:30px;
 }
 
 button{
-background:red;
-color:white;
-border:none;
-padding:6px 12px;
-border-radius:8px;
-cursor:pointer;
+  background:red;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 .checkout{
-margin-top:20px;
-background:#0b1c2d;
-padding:10px 25px;
-border-radius:20px;
+  margin-top:20px;
+  background:#0b1c2d;
+  padding:10px 25px;
+  border-radius:20px;
 }
 </style>
 </head>
@@ -69,91 +71,63 @@ border-radius:20px;
 <div class="total" id="cartTotal"></div>
 
 <div style="text-align:center;">
-<button class="checkout" onclick="checkout()">Checkout</button>
+  <button class="checkout" onclick="checkout()">Checkout</button>
 </div>
 
 <script>
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function showCart(){
+  const box = document.getElementById("cartItems");
+  const totalBox = document.getElementById("cartTotal");
+  const emptyMsg = document.getElementById("emptyMsg");
 
-let box = document.getElementById("cartItems");
-let totalBox = document.getElementById("cartTotal");
+  box.innerHTML = "";
+  let total = 0;
 
-box.innerHTML="";
-let total = 0;
+  if(cart.length === 0){
+    emptyMsg.style.display = "block";
+    totalBox.innerHTML = "";
+    return;
+  }else{
+    emptyMsg.style.display = "none";
+  }
 
-if(cart.length===0){
-document.getElementById("emptyMsg").style.display="block";
-totalBox.innerHTML="";
-return;
-}else{
-document.getElementById("emptyMsg").style.display="none";
-}
+  cart.forEach((item,index)=>{
+    total += Number(item.price);
 
-cart.forEach((item,index)=>{
+    box.innerHTML += `
+      <div class="item">
+        <img src="${item.img}">
+        <div style="flex:1">
+          <b>${item.name}</b><br>
+          Color: ${item.color}<br>
+          Size: ${item.size}<br>
+          Qty: ${item.qty}<br>
+          <b>$${item.price}</b>
+        </div>
+        <button onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
 
-total += parseInt(item.price.replace("$",""));
-
-box.innerHTML += `
-<div class="item">
-<img src="${item.img}">
-<div style="flex:1">
-<b>${item.name}</b><br>
-${item.price}
-</div>
-
-<button onclick="removeItem(${index})">Remove</button>
-
-</div>`;
-});
-
-totalBox.innerHTML = "Total: $" + total;
+  totalBox.innerHTML = "Total: $" + total;
 }
 
 function removeItem(i){
-cart.splice(i,1);
-localStorage.setItem("cart",JSON.stringify(cart));
-showCart();
+  cart.splice(i,1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  showCart();
 }
 
 function checkout(){
-alert("Order placed successfully 🌸");
-localStorage.removeItem("cart");
-window.location.href="thankyou.html";
+  alert("Order placed successfully 🌸");
+  localStorage.removeItem("cart");
+  window.location.href = "thankyou.html";
 }
 
 showCart();
-
-</script>
-  <script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let total = Number(localStorage.getItem("total")) || 0;
-
-const cartBox = document.getElementById("cart-items");
-const totalBox = document.getElementById("cart-total");
-const emptyText = document.getElementById("empty-text");
-
-if(cart.length === 0){
-  emptyText.style.display = "block";
-}else{
-  emptyText.style.display = "none";
-
-  cart.forEach(item=>{
-    let div = document.createElement("div");
-    div.className = "cart-item";
-    div.innerHTML = `
-      <h3>${item.name}</h3>
-      <p>$${item.price}</p>
-    `;
-    cartBox.appendChild(div);
-  });
-
-  totalBox.innerText = "$" + total;
-}
 </script>
 
 </body>
-
 </html>
