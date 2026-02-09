@@ -52,15 +52,43 @@ qty.innerText=f.qty;
 price.innerText="$"+f.price;
 }
 
+const categories = ["baby","anniversary","birthday","roses","wedding"];
+
 function next(){
+
 index++;
-if(index>=flowers[currentCategory].length) index=0;
+
+if(index >= flowers[currentCategory].length){
+
+let catIndex = categories.indexOf(currentCategory);
+catIndex = (catIndex + 1) % categories.length;
+
+currentCategory = categories[catIndex];
+index = 0;
+
+document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"));
+document.querySelector(`[data-cat="${currentCategory}"]`).classList.add("active");
+}
+
 show();
 }
 
 function prev(){
+
 index--;
-if(index<0) index=flowers[currentCategory].length-1;
+
+if(index < 0){
+
+let catIndex = categories.indexOf(currentCategory);
+catIndex = (catIndex - 1 + categories.length) % categories.length;
+
+currentCategory = categories[catIndex];
+index = flowers[currentCategory].length-1;
+
+document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"));
+document.querySelector(`[data-cat="${currentCategory}"]`).classList.add("active");
+}
+
 show();
 }
 
@@ -82,3 +110,4 @@ window.onload=()=>{
 document.querySelector(".menu button").classList.add("active");
 show();
 };
+
