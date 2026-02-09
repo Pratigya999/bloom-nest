@@ -1,23 +1,8 @@
 const flowers = {
-baby: [
-  {
-    name: "Baby Bloom",
-    benefits: "Gentle and fresh, perfect for new beginnings.",
-    color: "Pink",
-    size: "Small",
-    qty: "6 stems",
-    price: 15,
-    img: "images/baby.webp"
-  },
-  {
-    name: "Soft Baby Roses",
-    benefits: "Soft pastel roses for newborns.",
-    color: "Peach",
-    size: "Small",
-    qty: "8 stems",
-    price: 18,
-    img: "images/baby.webp"
-  }
+
+baby:[
+{name:"Baby Bloom",img:"images/baby.webp",price:15,color:"Pink",size:"Small",qty:"6 stems",benefits:"Perfect newborn gift"},
+{name:"Soft Baby Roses",img:"images/baby.webp",price:18,color:"Peach",size:"Small",qty:"8 stems",benefits:"Soft pastel roses"}
 ],
 
 anniversary:[
@@ -58,10 +43,6 @@ btn.classList.add("active");
 function show(){
 let f=flowers[currentCategory][index];
 
-document.querySelector(".card").classList.remove("fade");
-void document.querySelector(".card").offsetWidth;
-document.querySelector(".card").classList.add("fade");
-
 flowerImg.src=f.img;
 name.innerText=f.name;
 benefits.innerText=f.benefits;
@@ -72,14 +53,14 @@ price.innerText="$"+f.price;
 }
 
 function next(){
-if(!flowers[currentCategory]) return;
-index = (index + 1) % flowers[currentCategory].length;
+index++;
+if(index>=flowers[currentCategory].length) index=0;
 show();
 }
 
 function prev(){
-if(!flowers[currentCategory]) return;
-index = (index - 1 + flowers[currentCategory].length) % flowers[currentCategory].length;
+index--;
+if(index<0) index=flowers[currentCategory].length-1;
 show();
 }
 
@@ -87,23 +68,17 @@ function addToCart(){
 let f = flowers[currentCategory][index];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let total = Number(localStorage.getItem("total")) || 0;
-
 cart.push(f);
-total += Number(f.price);
 
-localStorage.setItem("cart", JSON.stringify(cart));
-localStorage.setItem("total", total);
+localStorage.setItem("cart",JSON.stringify(cart));
 
-document.getElementById("cartCount").innerText = cart.length;
+document.getElementById("cartCount").innerText=cart.length;
 
 document.getElementById("toast").classList.add("show");
 setTimeout(()=>document.getElementById("toast").classList.remove("show"),2000);
 }
 
-/* Auto highlight Baby on load */
-window.onload = ()=>{
+window.onload=()=>{
 document.querySelector(".menu button").classList.add("active");
 show();
-}
-
+};
