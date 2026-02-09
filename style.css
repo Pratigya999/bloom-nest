@@ -60,6 +60,12 @@ body {
   transform:scale(1.1);
   box-shadow:0 10px 25px rgba(230,57,70,.5);
 }
+.menu button.active{
+    background: 
+  linear-gradient(45deg,#0b1c2d,#e63946);
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+    transform:scale(1.1);
+}
 
 /* GRID layout so scrolling works */
 .display {
@@ -467,3 +473,4 @@ body {
   border-radius:20px;
 
 }
+
