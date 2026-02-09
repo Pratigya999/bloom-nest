@@ -20,7 +20,7 @@ birthday:[
 ],
 
 roses:[
-{name:"Classic Red Roses",img:"iimages/roses.webp",price:30,color:"Red",size:"Medium",qty:"15",benefits:"Pure romance"},
+{name:"Classic Red Roses",img:"images/roses.webp",price:30,color:"Red",size:"Medium",qty:"15",benefits:"Pure romance"},
 {name:"White Roses",img:"images/roses.webp",price:32,color:"White",size:"Medium",qty:"15",benefits:"Peace flowers"}
 ],
 
@@ -73,5 +73,6 @@ document.getElementById("total").innerText=total;
 }
 
 show();
+
 
 
