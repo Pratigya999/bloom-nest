@@ -1,209 +1,75 @@
-// Flower data
-const categories = ["baby","anniversary","birthday","roses","wedding"];
+let cart = [];
+let total = 0;
+
 const flowers = {
-  baby: [
-    {
-      name: "Baby Bloom",
-      benefits: "Gentle and fresh, perfect for new beginnings.",
-      color: "Pink",
-      size: "Small",
-      qty: "6 stems",
-      price: "$15",
-      img: "baby.webp"
-    }
-  ],
 
-  anniversary: [
-    {
-      name: "Anniversary Special",
-      benefits: "Celebrate love with elegance.",
-      color: "Red & White",
-      size: "Medium",
-      qty: "12 stems",
-      price: "$30",
-      img: "anniversary.webp"
-    }
-  ],
+baby:[
+{name:"Baby Pink Roses",img:"images/baby.webp",price:25,color:"Pink",size:"Small",qty:"12",benefits:"Perfect newborn gift"},
+{name:"Soft Tulips",img:"images/baby.webp",price:30,color:"White",size:"Medium",qty:"10",benefits:"Gentle baby blooms"}
+],
 
-  birthday: [
-    {
-      name: "Birthday Bouquet",
-      benefits: "Bright and cheerful for celebrations.",
-      color: "Mixed",
-      size: "Large",
-      qty: "18 stems",
-      price: "$40",
-      img: "birthday.webp"
-    }
-  ],
+anniversary:[
+{name:"Red Rose Bouquet",img:"images/anniversary.webp",price:40,color:"Red",size:"Large",qty:"20",benefits:"Romantic classic"},
+{name:"Pink Roses Box",img:"images/anniversary.webp",price:45,color:"Pink",size:"Medium",qty:"18",benefits:"Love expression"},
+{name:"Mixed Basket",img:"images/anniversary.webp",price:50,color:"Mixed",size:"Large",qty:"25",benefits:"Premium combo"}
+],
 
-  roses: [
-    {
-      name: "Classic Roses",
-      benefits: "Symbol of love and passion.",
-      color: "Red",
-      size: "Large",
-      qty: "24 stems",
-      price: "$50",
-      img: "roses.webp"
-    }
-  ],
+birthday:[
+{name:"Birthday Lilies",img:"images/birthday.webp",price:35,color:"Yellow",size:"Medium",qty:"15",benefits:"Bright happiness"},
+{name:"Party Roses",img:"images/birthday.webp",price:38,color:"Mixed",size:"Medium",qty:"18",benefits:"Celebration flowers"}
+],
 
-  wedding: [
-    {
-      name: "Wedding Elegance",
-      benefits: "Perfect for the big day.",
-      color: "White",
-      size: "Extra Large",
-      qty: "30 stems",
-      price: "$70",
-      img: "wedding.webp"
-    }
-  ]
+roses:[
+{name:"Classic Red Roses",img:"images/roses.webp",price:30,color:"Red",size:"Medium",qty:"15",benefits:"Pure romance"},
+{name:"White Roses",img:"images/roses.webp",price:32,color:"White",size:"Medium",qty:"15",benefits:"Peace flowers"}
+],
+
+wedding:[
+{name:"Wedding White Combo",img:"images/wedding.webp",price:60,color:"White",size:"Large",qty:"30",benefits:"Wedding elegance"},
+{name:"Bride Pink Set",img:"images/wedding.webp",price:65,color:"Pink",size:"Large",qty:"28",benefits:"Bride special"}
+]
+
 };
 
-let currentCategory = null;
-let currentIndex = 0;
+let currentCategory="baby";
+let index=0;
 
-// Load flowers by category
-function loadFlowers(category, btn) {
+function loadFlowers(cat,btn){
+currentCategory=cat;
+index=0;
+show();
 
-  if(btn){
-    document.querySelectorAll(".menu button")
-      .forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  }
-
-  currentCategory = category;
-  currentIndex = 0;
-  showFlower();
-}
-// Show current flower
-function showFlower() {
-    document.querySelector(".card").classList.remove("fade");
-  if (!currentCategory) return;
-
-  const flower = flowers[currentCategory][currentIndex];
-
-  document.getElementById("flowerImg").src = flower.img;
-  document.getElementById("name").textContent = flower.name;
-  document.getElementById("benefits").textContent = flower.benefits;
-  document.getElementById("color").textContent = flower.color;
-  document.getElementById("size").textContent = flower.size;
-  document.getElementById("qty").textContent = flower.qty;
-  document.getElementById("price").textContent = flower.price;
-  setTimeout(() => {
-  document.querySelector(".card").classList.add("fade");
-}, 10);
+document.querySelectorAll(".menu button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
 }
 
-// Next / Previous
+function show(){
+let f=flowers[currentCategory][index];
+flowerImg.src=f.img;
+name.innerText=f.name;
+benefits.innerText=f.benefits;
+color.innerText=f.color;
+size.innerText=f.size;
+qty.innerText=f.qty;
+price.innerText="$"+f.price;
+}
+
 function next(){
-  let i = categories.indexOf(currentCategory);
-  i = (i + 1) % categories.length;
-  currentCategory = categories[i];
-  currentIndex = 0;
-  showFlower();
+index=(index+1)%flowers[currentCategory].length;
+show();
 }
 
 function prev(){
-  let i = categories.indexOf(currentCategory);
-  i = (i - 1 + categories.length) % categories.length;
-  currentCategory = categories[i];
-  currentIndex = 0;
-  showFlower();
+index=(index-1+flowers[currentCategory].length)%flowers[currentCategory].length;
+show();
 }
-// CART INIT
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let total = cart.reduce((sum, item) => sum + parseInt(item.price.replace("$","")), 0);
-
-updateCartCount();
-
-/* ---------------- CART SYSTEM ---------------- */
 
 function addToCart(){
-  const flower = flowers[currentCategory][currentIndex];
-  cart.push(flower);
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  total += parseInt(flower.price.replace("$",""));
-  document.getElementById("total").textContent = total;
-
-  updateCartCount();
-  showToast();
+let f=flowers[currentCategory][index];
+cart.push(f);
+total+=f.price;
+cartCount.innerText=cart.length;
+document.getElementById("total").innerText=total;
 }
 
-function updateCartCount() {
-  const el = document.getElementById("cartCount");
-  if (el) el.textContent = cart.length;
-}
-
-function showToast(){
-  const toast = document.getElementById("toast");
-  toast.classList.add("show");
-
-  setTimeout(()=>{
-    toast.classList.remove("show");
-  },2000);
-}
-
-// REMOVE ALL ITEMS (optional clear cart)
-function clearCart(){
-  cart = [];
-  total = 0;
-  localStorage.removeItem("cart");
-  updateCartCount();
-}
-loadFlowers("baby");
-function checkout(){
-  alert("Order placed successfully 🌸");
-  localStorage.removeItem("cart");
-  window.location.href = "thankyou.html";
-}
-let startX = 0;
-
-const card = document.querySelector(".card");
-
-card.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
-
-card.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
-
-  if(startX - endX > 50){
-    next();   // swipe LEFT → next flower
-  }
-
-  if(endX - startX > 50){
-    prev();   // swipe RIGHT → previous flower
-  }
-});
-function zoomImage(img){
-  let overlay = document.createElement("div");
-  overlay.className="zoom-overlay";
-
-  let zoomed = document.createElement("img");
-  zoomed.src = img.src;
-
-  overlay.appendChild(zoomed);
-  document.body.appendChild(overlay);
-
-  overlay.onclick = ()=> overlay.remove();
-}
-function openZoom(){
-  let src = document.getElementById("flowerImg").src;
-
-  let div = document.createElement("div");
-  div.className = "zoomBox";
-
-  div.innerHTML = `<img src="${src}">`;
-
-  document.body.appendChild(div);
-
-  div.onclick = function(){
-    div.remove();
-  }
-
-}
+show();
