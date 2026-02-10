@@ -110,41 +110,55 @@ wedding: [
 let currentCategory = "baby";
 let index = 0;
 
+/* LOAD CATEGORY */
 function loadFlowers(cat, btn){
   currentCategory = cat;
   index = 0;
-  show();
 
   document.querySelectorAll(".menu button")
     .forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
+
+  if(btn) btn.classList.add("active");
+
+  show();
 }
 
+/* SHOW FLOWER */
 function show(){
   const f = flowers[currentCategory][index];
 
-  flowerImg.src = f.img;
-  name.innerText = f.name;
-  benefits.innerText = f.benefits;
-  color.innerText = f.color;
-  size.innerText = f.size;
-  qty.innerText = f.qty;
-  price.innerText = "$" + f.price;
+  document.getElementById("flowerImg").src = f.img;
+  document.getElementById("name").innerText = f.name;
+  document.getElementById("benefits").innerText = f.benefits;
+  document.getElementById("color").innerText = f.color;
+  document.getElementById("size").innerText = f.size;
+  document.getElementById("qty").innerText = f.qty;
+  document.getElementById("price").innerText = "$" + f.price;
 }
 
+/* NEXT */
 function next(){
-  index = (index + 1) % flowers[currentCategory].length;
+  index++;
+
+  if(index >= flowers[currentCategory].length){
+    index = 0;
+  }
+
   show();
 }
 
+/* PREVIOUS */
 function prev(){
-  index = (index - 1 + flowers[currentCategory].length) 
-          % flowers[currentCategory].length;
+  index--;
+
+  if(index < 0){
+    index = flowers[currentCategory].length - 1;
+  }
+
   show();
 }
 
-/* INIT */
-window.onload = () => {
-  document.querySelector(".menu button").classList.add("active");
-  show();
+/* AUTO LOAD BABY */
+window.onload = ()=>{
+  loadFlowers("baby");
 };
